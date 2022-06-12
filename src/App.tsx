@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import "twin.macro";
 
 import { Router } from "./Routes";
-import { Layout } from "./components/layout/Layout";
 import GlobalStyles from "./style/GlobalStyles";
 
 const App = () => {
@@ -10,9 +9,7 @@ const App = () => {
     <Fragment>
       <GlobalStyles />
 
-      <Layout>
-        <Router />
-      </Layout>
+      <Router />
     </Fragment>
   );
 };

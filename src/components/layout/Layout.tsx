@@ -1,33 +1,31 @@
 import { Disclosure, Menu } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { FC, Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import tw from "twin.macro";
-
-import { HasChildren } from "../../types/GeneralTypes";
 
 import Logo from "../shared/Logo";
 import { Transition } from "../shared/Transition";
 
-const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
+export const Layout: FC = () => {
+  const user = {
+    name: "Tom Cook",
+    email: "tom@example.com",
+    imageUrl:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  };
 
-const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Test", href: "/test" },
-];
+  const navigation = [
+    { name: "Home", href: "/" },
+    { name: "Test", href: "/test" },
+  ];
 
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
-];
+  const userNavigation = [
+    { name: "Your Profile", href: "#" },
+    { name: "Settings", href: "#" },
+    { name: "Sign out", href: "#" },
+  ];
 
-export const Layout: FC<HasChildren> = ({ children }) => {
   return (
     <div tw="h-full flex flex-col">
       {/* Navbar */}
@@ -206,7 +204,9 @@ export const Layout: FC<HasChildren> = ({ children }) => {
       </header>
 
       {/* Page Content */}
-      <main tw="flex-1 sm:container sm:px-6 lg:px-8 py-6">{children}</main>
+      <main tw="flex-1 sm:container sm:px-6 lg:px-8 py-6">
+        <Outlet />
+      </main>
 
       {/* <footer tw="flex-shrink-0 h-16 bg-slate-800 text-slate-100 font-montserrat">
         <div tw="sm:container mx-auto py-4 px-4 sm:px-6 lg:px-8">Footer</div>
