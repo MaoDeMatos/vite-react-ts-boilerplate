@@ -22,7 +22,7 @@ export const Card: FC<BaseCardProps> = ({
       tw="rounded-2xl min-h-[10rem] min-w-full sm:(min-w-[16rem])"
       onClick={onClick}
       css={[
-        hasShadow && tw`shadow-md bg-white`,
+        hasShadow && tw`shadow-md bg-base-50`,
         hasPadding && tw`px-4 py-2 sm:(px-6 py-4)`,
       ]}
       {...props}
@@ -40,10 +40,8 @@ export const EmptyStateCard: FC<BaseCardProps> = ({
     <Card
       hasShadow={false}
       onClick={onClick}
-      tw="transition flex border-4 border-dashed border-slate-200 text-slate-400 all-child:(m-auto)"
-      css={
-        onClick && tw`cursor-pointer hover:(text-slate-700 border-slate-400)`
-      }
+      tw="transition flex border-4 border-dashed border-base-200 text-base-400 all-child:(m-auto)"
+      css={onClick && tw`cursor-pointer hover:(text-base-700 border-base-400)`}
       {...props}
     >
       {children ?? <p>{"No content"}</p>}
@@ -69,12 +67,12 @@ export const PulsingCard: FC<HasChildren> = (props: {}) => {
   return (
     <Card hasShadow hasPadding tw="flex flex-col" {...props}>
       <div tw="flex flex-col flex-1 gap-4 animate-pulse">
-        <span tw="h-7 w-9/12 rounded bg-slate-400" />
+        <span tw="h-7 w-9/12 rounded bg-base-400" />
 
         <p tw="flex flex-col gap-1 justify-between w-full">
-          <span tw="h-5 w-full rounded bg-slate-400" />
-          <span tw="h-5 w-10/12 rounded bg-slate-400" />
-          <span tw="h-5 w-11/12 rounded bg-slate-400" />
+          <span tw="h-5 w-full rounded bg-base-400" />
+          <span tw="h-5 w-10/12 rounded bg-base-400" />
+          <span tw="h-5 w-11/12 rounded bg-base-400" />
         </p>
       </div>
     </Card>

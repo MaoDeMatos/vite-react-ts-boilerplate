@@ -1,13 +1,52 @@
 import { Disclosure, Menu } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-import { FC, Fragment } from "react";
+import {
+  BellIcon,
+  MenuIcon,
+  MoonIcon,
+  SunIcon,
+  XIcon,
+} from "@heroicons/react/outline";
+import { FC, Fragment, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import tw from "twin.macro";
 
 import Logo from "../shared/Logo";
 import { Transition } from "../shared/Transition";
 
+type ToggleThemeButtonProps = {
+  theme: string;
+  setter: Function;
+};
+
+const ToggleThemeButton: FC<ToggleThemeButtonProps> = ({
+  theme,
+  setter,
+  ...props
+}) => {
+  return (
+    <button
+      type="button"
+      tw="transition p-1 rounded-full text-slate-400 hover:text-white focus:(outline-none ring-2 ring-offset-2 ring-offset-slate-800 ring-white)"
+      onClick={() => setter()}
+      {...props}
+    >
+      <span tw="sr-only">Toggle dark theme</span>
+      {theme === "light" ? (
+        <MoonIcon tw="h-6 w-6" aria-hidden="true" />
+      ) : (
+        <SunIcon tw="h-6 w-6" aria-hidden="true" />
+      )}
+    </button>
+  );
+};
+
 export const Layout: FC = () => {
+  const [theme, setTheme] = useState("dark");
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   const user = {
     name: "Tom Cook",
     email: "tom@example.com",
@@ -27,9 +66,12 @@ export const Layout: FC = () => {
   ];
 
   return (
-    <div tw="h-full flex flex-col">
+    <div
+      tw="transition h-full flex flex-col overflow-y-auto bg-base-100 text-base-900"
+      css={theme === "dark" ? tw`dark` : null}
+    >
       {/* Navbar */}
-      <Disclosure as="nav" tw="bg-slate-800 font-montserrat">
+      <Disclosure as="nav" tw="transition bg-slate-800 font-montserrat">
         {({ open }) => (
           <Fragment>
             <div tw="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,17 +96,19 @@ export const Layout: FC = () => {
                 </div>
 
                 <div tw="hidden md:block">
-                  <div tw="ml-4 flex items-center md:ml-6">
+                  <div tw="ml-4 flex items-center gap-3 md:ml-6">
+                    <ToggleThemeButton theme={theme} setter={toggleTheme} />
+                    {/*
                     <button
                       type="button"
-                      tw="transition bg-slate-800 p-1 rounded-full text-slate-400 hover:text-white focus:(outline-none ring-2 ring-offset-2 ring-offset-slate-800 ring-white)"
+                      tw="transition p-1 rounded-full text-slate-400 hover:text-white focus:(outline-none ring-2 ring-offset-2 ring-offset-slate-800 ring-white)"
                     >
                       <span tw="sr-only">View notifications</span>
                       <BellIcon tw="h-6 w-6" aria-hidden="true" />
-                    </button>
+                    </button> */}
 
                     {/* Profile dropdown */}
-                    <Menu as="div" tw="ml-3 relative">
+                    <Menu as="div" tw="relative">
                       <div>
                         {/* <typeof Fragment> is a dirty fix to avoid ts(2590) */}
                         <Menu.Button<
@@ -169,13 +213,19 @@ export const Layout: FC = () => {
                     </div>
                   </div>
 
-                  <button
+                  <ToggleThemeButton
+                    theme={theme}
+                    setter={toggleTheme}
+                    tw="ml-auto flex-shrink-0"
+                  />
+
+                  {/* <button
                     type="button"
                     tw="ml-auto bg-slate-800 flex-shrink-0 p-1 rounded-full text-slate-400 hover:text-white focus:(outline-none ring-2 ring-offset-2 ring-offset-slate-800 ring-white)"
                   >
                     <span tw="sr-only">View notifications</span>
                     <BellIcon tw="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  </button> */}
                 </div>
 
                 <div tw="mt-3 px-2 space-y-1">
@@ -197,9 +247,9 @@ export const Layout: FC = () => {
       </Disclosure>
 
       {/* Page Header */}
-      <header tw="bg-white shadow font-montserrat">
+      <header tw="transition bg-base-50 shadow font-montserrat">
         <div tw="sm:container mx-auto py-4 px-4 sm:px-6 lg:px-8">
-          <h1 tw="text-3xl font-bold text-slate-900">Dashboard</h1>
+          <h1 tw="text-3xl font-bold text-base-900">Dashboard</h1>
         </div>
       </header>
 
@@ -208,7 +258,7 @@ export const Layout: FC = () => {
         <Outlet />
       </main>
 
-      {/* <footer tw="flex-shrink-0 h-16 bg-slate-800 text-slate-100 font-montserrat">
+      {/* <footer tw="flex-shrink-0 h-16 bg-base-800 text-base-100 font-montserrat">
         <div tw="sm:container mx-auto py-4 px-4 sm:px-6 lg:px-8">Footer</div>
       </footer> */}
     </div>

@@ -7,8 +7,10 @@ const customStyles = css({
     ...tw`h-full`,
   },
   body: {
-    WebkitTapHighlightColor: theme`colors.primary.700` + "80", // for mobile devices, 80 = opacity 50%
-    ...tw`antialiased bg-slate-50 text-slate-900`,
+    // for mobile devices
+    // HEX: 80 = opacity 50%
+    WebkitTapHighlightColor: theme`colors.primary.700` + "80",
+    ...tw`antialiased`,
   },
   a: {
     ...tw`text-primary-500`,
@@ -17,7 +19,7 @@ const customStyles = css({
     ...tw`px-2 py-1 bg-slate-600 rounded-lg text-slate-100`,
   },
   "::selection": {
-    ...tw`bg-primary-700 text-slate-100`,
+    ...tw`bg-primary-700 text-base-100`,
   },
 });
 
