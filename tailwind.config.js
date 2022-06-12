@@ -1,6 +1,51 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-const colors = require("tailwindcss/colors");
+const {
+  colors,
+  reversedColors,
+} = require("./custom-plugins/tailwind-plugins/TailwindInvertColors");
 
+const themes = [
+  {
+    name: "base",
+    selectors: [":root"],
+    theme: {
+      colors: {
+        ...colors,
+        base: colors.gray,
+        primary: colors.indigo,
+      },
+      borderRadius: {
+        ...defaultTheme.borderRadius,
+      },
+    },
+  },
+  {
+    selectors: [".dark"],
+    theme: {
+      colors: {
+        base: reversedColors.slate,
+        primary: reversedColors.indigo,
+      },
+    },
+  },
+  {
+    selectors: [".square"],
+    theme: {
+      borderRadius: {
+        sm: "0",
+        DEFAULT: "0",
+        md: "0",
+        lg: "0",
+        xl: "0",
+        "2xl": "0",
+        "3xl": "0",
+        full: "0",
+      },
+    },
+  },
+];
+
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   // darkMode: "class",
@@ -20,13 +65,8 @@ module.exports = {
         ],
         montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
       },
-      colors: {
-        primary: colors.indigo,
-        secondary: colors.amber,
-        slate: colors.slate,
-        cyan: colors.cyan,
-      },
     },
   },
   variants: {},
+  plugins: [require("tailwindcss-theme-swapper")({ themes: themes })],
 };
