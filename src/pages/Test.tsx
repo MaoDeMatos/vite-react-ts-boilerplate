@@ -30,6 +30,11 @@ const Test = () => {
         <BaseButton type="secondary" />
         <BaseButton type="secondary" size="lg" />
       </div>
+      <div tw="w-full flex flex-col sm:flex-row gap-2 justify-center items-center">
+        <BaseButton type="tertiary" size="sm" />
+        <BaseButton type="tertiary" />
+        <BaseButton type="tertiary" size="lg" />
+      </div>
 
       <div tw="flex flex-wrap w-full justify-center items-center px-4 py-6 sm:px-0 gap-4 md:all-child:(max-w-sm)">
         {pulsingCards.map(el => (

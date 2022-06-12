@@ -6,7 +6,7 @@ import tw, { css } from "twin.macro";
 import { HasChildren, isClickable } from "../../types/GeneralTypes";
 
 export type BaseButtonProps = {
-  type?: "primary" | "secondary";
+  type?: "primary" | "secondary" | "tertiary";
   size?: "sm" | "md" | "lg";
 } & HasChildren &
   isClickable;
@@ -19,10 +19,10 @@ export const BaseButton: FC<BaseButtonProps> = ({
 }) => {
   const typeStylesButton =
     type === "primary"
-      ? tw`bg-primary-700 border-transparent text-primary-100 hover:(bg-primary-800 shadow-lg)`
+      ? tw`bg-primary-600 border-transparent text-primary-100 hover:(bg-primary-700 shadow-lg)`
       : type === "secondary"
-      ? tw`bg-transparent border-primary-600 hover:(bg-primary-600 text-primary-100 shadow-lg)`
-      : null;
+      ? tw`bg-transparent border-primary-500 hover:(bg-primary-500 text-primary-100 shadow-lg)`
+      : tw`bg-transparent border-transparent shadow-none underline hover:(text-primary-400)`;
   const sizeStylesButton =
     size === "sm"
       ? tw`px-2 py-1 text-base rounded-md`
