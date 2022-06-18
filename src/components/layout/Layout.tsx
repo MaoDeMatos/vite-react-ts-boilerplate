@@ -1,44 +1,12 @@
 import { Disclosure, Menu } from "@headlessui/react";
-import {
-  BellIcon,
-  MenuIcon,
-  MoonIcon,
-  SunIcon,
-  XIcon,
-} from "@heroicons/react/outline";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { FC, Fragment, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import tw from "twin.macro";
 
 import Logo from "../shared/Logo";
+import { ToggleThemeButton } from "../shared/ToggleThemeButton";
 import { Transition } from "../shared/Transition";
-
-type ToggleThemeButtonProps = {
-  theme: string;
-  setter: Function;
-};
-
-const ToggleThemeButton: FC<ToggleThemeButtonProps> = ({
-  theme,
-  setter,
-  ...props
-}) => {
-  return (
-    <button
-      type="button"
-      tw="transition p-1 rounded-full text-slate-400 hover:text-white focus:(outline-none ring-2 ring-offset-2 ring-offset-slate-800 ring-white)"
-      onClick={() => setter()}
-      {...props}
-    >
-      <span tw="sr-only">Toggle dark theme</span>
-      {theme === "light" ? (
-        <MoonIcon tw="h-6 w-6" aria-hidden="true" />
-      ) : (
-        <SunIcon tw="h-6 w-6" aria-hidden="true" />
-      )}
-    </button>
-  );
-};
 
 export const Layout: FC = () => {
   const [theme, setTheme] = useState("dark");
@@ -98,8 +66,7 @@ export const Layout: FC = () => {
                 <div tw="hidden md:block">
                   <div tw="ml-4 flex items-center gap-3 md:ml-6">
                     <ToggleThemeButton theme={theme} setter={toggleTheme} />
-                    {/*
-                    <button
+                    {/*<button
                       type="button"
                       tw="transition p-1 rounded-full text-slate-400 hover:text-white focus:(outline-none ring-2 ring-offset-2 ring-offset-slate-800 ring-white)"
                     >

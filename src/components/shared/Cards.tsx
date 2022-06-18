@@ -19,7 +19,7 @@ export const Card: FC<BaseCardProps> = ({
 }) => {
   return (
     <article
-      tw="rounded-2xl min-h-[10rem] min-w-full sm:(min-w-[16rem])"
+      tw="transition rounded-2xl min-h-[10rem] min-w-full sm:(min-w-[16rem])"
       onClick={onClick}
       css={[
         hasShadow && tw`shadow-md bg-base-50`,
