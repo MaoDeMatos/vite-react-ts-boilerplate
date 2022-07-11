@@ -1,19 +1,16 @@
 import { Disclosure, Menu } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
-import { FC, Fragment, useState } from "react";
+import { FC, Fragment } from "react";
 import { Link, Outlet } from "react-router-dom";
 import tw from "twin.macro";
 
+import { useThemeContext } from "../../contexts/ThemeContext";
 import Logo from "../shared/Logo";
 import { ToggleThemeButton } from "../shared/ToggleThemeButton";
 import { Transition } from "../shared/Transition";
 
 export const Layout: FC = () => {
-  const [theme, setTheme] = useState("dark");
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+  const { theme } = useThemeContext();
 
   const user = {
     name: "Tom Cook",
@@ -36,7 +33,7 @@ export const Layout: FC = () => {
   return (
     <div
       tw="transition h-full flex flex-col overflow-y-auto bg-base-100 text-base-900"
-      css={theme === "dark" ? tw`dark` : null}
+      css={theme.color === "dark" ? tw`dark` : null}
     >
       {/* Navbar */}
       <Disclosure as="nav" tw="transition bg-slate-800 font-montserrat">
@@ -65,7 +62,7 @@ export const Layout: FC = () => {
 
                 <div tw="hidden md:block">
                   <div tw="ml-4 flex items-center gap-3 md:ml-6">
-                    <ToggleThemeButton theme={theme} setter={toggleTheme} />
+                    <ToggleThemeButton />
                     {/*<button
                       type="button"
                       tw="transition p-1 rounded-full text-slate-400 hover:text-white focus:(outline-none ring-2 ring-offset-2 ring-offset-slate-800 ring-white)"
@@ -180,11 +177,7 @@ export const Layout: FC = () => {
                     </div>
                   </div>
 
-                  <ToggleThemeButton
-                    theme={theme}
-                    setter={toggleTheme}
-                    tw="ml-auto flex-shrink-0"
-                  />
+                  <ToggleThemeButton tw="ml-auto flex-shrink-0" />
 
                   {/* <button
                     type="button"
